@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina de reserva de viajes</title>
+</head>
+<body>
+    <h1>comleta el siguente formulario para poder agendar <br> un vija con nosotros.</h1>
+
+    <form>
+        <p>personal information</p> <br>
+           <Form>
+        <label for="fname">Nombre...</label><br>
+        <input type="text" name="Fname" id="fname"><br><br>
+        <label for="edad">Edad:</label> <br>
+        <input type="number" id="edad" name="edad"> <br><br>
+          <label for="telefono">Telefono:</label> <br>
+        <input type="number" id="telefono" name="telefono"> <br><br>
+         <label for="correo">Correo electronico:</label> <br>
+        <input type="email" id="correo" name="correo" placeholder="example@emal.com"> <br><br>
+
+        <p>Datos del Viaje</p> <br>
+        <label for="pasajeros">Numero de acompañantes:</label>
+        <input type="number" name="pasajeros" id="pasajeros" step="1" max="5" min="1"><br><br>
+        <label for="origen">¿De donde empiza el viaje?</label>
+        <input type="text" name="origen" id="origen" readonly value="San Salvador"> <br><br>
+        <label for="lugar">Elije tu destino:</label>
+        <select name="lugar" id="lugar" size="4" multiple>
+            <option value="Lauterbrunnen">Lauterbrunnen</option>
+            <option value="Florencia">Florencia</option>
+            <option value="Barcelona">Barcelona</option>
+            <option value="Venecia">Venecia</option>
+        </select> <br><br>
+        <label for="fecha1">¿Cuando empezara el viaje?</label>
+        <input type="date" name="fecha1" id="fecha1"> <br><br>
+        <label for="fecha2">¿Cuando terminara el viaje?</label>
+        <input type="date" name="fecha2" id="fecha2"> <br><br>
+    <input type="submit" value="Registrarse">
+    <input type="reset" value="Borrar"> <br>
+    </form>
+</body>
+</html>
