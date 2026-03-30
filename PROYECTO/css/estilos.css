@@ -1,3 +1,12 @@
+:root{
+    --primary-color:  #5bdbe5;
+    --dark-bg: #1b1b1b;
+    --darker-bg: #141313;
+    --light-text: #f5f5f5;
+    --gray-text: #aaaaaa;
+    --cardbg: #1e1e1e;
+    --border-color:#2d2d2d;
+}
 @import
 url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Special+Elite&display=swap');
 * {
@@ -5,34 +14,36 @@ margin: 0;
 padding: 0;
 box-sizing: border-box;
 }
+html{
+    scrollbar-color: var(--primary-color) var(--dark-bg);
+}
 body {
 font-family: 'Inter', sans-serif;
-background-color: #333;
+background-color:var(--dark-bg);
 background-size: contain;
 color: #333;
 line-height: 1.6;
 }
 header {
-background-color:#333;
+background-color:var(--darker-bg);
 color: #fff;
 padding: 10px;
-position: sticky; /* Posicionamiento sticky */
+position: sticky;
 top: 0;
-z-index: 1000; /*Este elemento estará muy por encima de cualquier otro*/
+z-index: 1000;
 display: flex;
 flex-direction: row;
 align-items: center;
 justify-content: space-evenly; 
 }
 .titulo {
-font-family: 'Special+Elite', cursive; /* Fuente tipo máquina de escribir */
+font-family: 'Special+Elite', cursive;
 letter-spacing: 5px;
 text-align: center;
 margin-bottom: 10px;
 max-height:max-content;
 font-size: 1.4rem;
 }
-/* Flexbox para menú */
 .menu {
 display: flex;
 justify-content: center;
@@ -42,66 +53,76 @@ font-size: 0.9rem;
 }
 .link {
 text-decoration: none;
-color: lightseagreen;
+color: var(--primary-color);
 padding: 8px 15px;
 border-radius: 5px;
 transition: 0.3s;
 }
-.link:hover {
-background-color: #c0b73d;
+.link2 {text-decoration: none;
+    color: var(--primary-color);
+        padding: 8px 15px;
+        border-radius: 5px;
+        transition: 0.3s;
+        background-color: var(--border-color);
 }
-/*MAIN Y SECCIONES */
+.link3 {text-decoration: none;
+        color: #7c1574;    
+        border-radius: 5px;
+        transition: 0.3s;
+}
+.link3:hover {color: var(--gray-text);
+}
+.link:hover, .link2:hover {
+background-color: var(--cardbg);
+}
 main {
 width: 85%;
 max-width: 1200px;
-margin: auto; /*mismo margen a la izquierda y derecha*/
+margin: auto; 
 }
 section {
-margin: 40px 0; /*Separar cada sección*/
+margin: 40px 0; 
 padding: 20px;
 background-color: #ffffffd5;
 border-radius: 10px;
-box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+box-shadow: 0 6px 12px #7c1574
 }
-/* ID selector */
 #s1, #s2, #s3, #s4, #s5 {
 margin-bottom: 15px;
 color: #584343;
 text-align: center;
 }
 .imgpeq {
-border: solid white 8px;
+border: solid white 6px;
 margin: 35px 0;
-float: right; /*que el texto envuelva la imagen*/
+float: right; 
 box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
-/* =========================
-LISTAS
-========================= */
+.iconoshabilidad {
+width: 90px;
+float: left;
+border: solid white 3px;
+margin: 4px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
 ul, ol {
 margin-left: 20px;
 }
 li {
 margin-bottom: 8px;
 }
-/* =========================
-TABLA (Box model)
-========================= */
 .ficha table {
 width: 100%;
 border-collapse: collapse;
 }
 .ficha th, .ficha td {
-border: 1px solid #747474;
+border: 1px solid var(--darker-bg);
 padding: 10px;
 }
 .ficha th {
-background-color: #5e5a4b;
-color: white;
+background-color: var(--border-color);
+color: rgb(255, 255, 255);
 }
-/* =========================
-FORMULARIO
-========================= */
 .centrado{
 text-align: center;
 }
@@ -118,18 +139,16 @@ max-width: 400px;
 border: 1px solid #ccc;
 border-radius: 5px;
 }
-/* Botón */
 input[type="submit"] {
-background-color: #7e724b;
-color: white;
+background-color: var(--border-color);
+color: var(--primary-color);
 border: none;
 cursor: pointer;
 margin-top: 10px;
 }
 input[type="submit"]:hover {
-background-color: #4b3d0c;
+background-color: var(--dark-bg);
 }
-/* GALERÍA (Grid + Flexbox alternativo) */
 .galeria {
 display: flex;
 flex-direction: column;
@@ -142,25 +161,22 @@ flex-direction: row;
 flex-wrap: wrap;
 gap: 10px;
 align-content: center;
-justify-content: center
+justify-content: center;
 }
 .galeria img {
 width: 30%;
 height: 300px;
-object-fit: cover; /* overflow control */
+object-fit: cover; 
 border-radius: 10px;
 transition: transform 0.3s;
 }
 .galeria img:hover {
 transform: scale(1.1);
 }
-/* =========================
-FOOTER
-========================= */
 footer {
 text-align: center;
 padding: 20px;
 background-color: #000;
-color: white;
+color: #7c1574;
 margin-top: 40px;
 }
