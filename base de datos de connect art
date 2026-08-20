@@ -1,0 +1,101 @@
+
+
+CREATE DATABASE  connectArt
+CREATE TABLE IF NOT EXISTS `artistas` (
+  `id_artista` int NOT NULL AUTO_INCREMENT,
+  `id_usuario` int NOT NULL,
+  `nombre_artistico` varchar(150) DEFAULT NULL,
+  `biografia` text,
+  `municipio` varchar(100) DEFAULT NULL,
+  `local` varchar(100) DEFAULT NULL,
+  `especialidad` varchar(100) DEFAULT NULL,
+  `imagen_banner_url` varchar(255) DEFAULT NULL,
+  `instagram` varchar(255) DEFAULT NULL,
+  `facebook` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_artista`),
+  UNIQUE KEY `id_usuario` (`id_usuario`),
+  CONSTRAINT `artistas_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE IF NOT EXISTS `categoria_obra` (
+  `id_categoria` int NOT NULL AUTO_INCREMENT,
+  `nombre_categoria` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_categoria`),
+  UNIQUE KEY `nombre_categoria` (`nombre_categoria`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE IF NOT EXISTS `favoritos` (
+  `id_favorito` int NOT NULL AUTO_INCREMENT,
+  `id_usuario` int NOT NULL,
+  `id_obra` int NOT NULL,
+  `fecha_agregado` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_favorito`),
+  KEY `id_usuario` (`id_usuario`),
+  KEY `id_obra` (`id_obra`),
+  CONSTRAINT `favoritos_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
+  CONSTRAINT `favoritos_ibfk_2` FOREIGN KEY (`id_obra`) REFERENCES `obras` (`id_obra`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE IF NOT EXISTS `imagenes_obra` (
+  `id_imagen` int NOT NULL AUTO_INCREMENT,
+  `id_obra` int NOT NULL,
+  `ruta_imagen` varchar(255) NOT NULL,
+  `fecha_subida` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_imagen`),
+  KEY `id_obra` (`id_obra`),
+  CONSTRAINT `imagenes_obra_ibfk_1` FOREIGN KEY (`id_obra`) REFERENCES `obras` (`id_obra`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE IF NOT EXISTS `obras` (
+  `id_obra` int NOT NULL AUTO_INCREMENT,
+  `id_artista` int NOT NULL,
+  `id_categoria` int NOT NULL,
+  `titulo` varchar(150) NOT NULL,
+  `descripcion` text,
+  `tecnica` varchar(100) DEFAULT NULL,
+  `precio` decimal(10,2) NOT NULL,
+  `fecha_creacion` date DEFAULT NULL,
+  `disponibilidad` enum('disponible','vendida') DEFAULT 'disponible',
+  `fecha_publicacion` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_obra`),
+  KEY `id_artista` (`id_artista`),
+  KEY `id_categoria` (`id_categoria`),
+  CONSTRAINT `obras_ibfk_1` FOREIGN KEY (`id_artista`) REFERENCES `artistas` (`id_artista`),
+  CONSTRAINT `obras_ibfk_2` FOREIGN KEY (`id_categoria`) REFERENCES `categoria_obra` (`id_categoria`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE IF NOT EXISTS `tutoriales_para_artistas` (
+  `id_tutorial` int NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(150) NOT NULL,
+  `descripcion` text,
+  `tipo` enum('video','articulo') NOT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `url_contenido` varchar(255) NOT NULL,
+  PRIMARY KEY (`id_tutorial`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `id_usuario` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL,
+  `correo` varchar(150) NOT NULL,
+  `password_hash` varchar(255) NOT NULL,
+  `rol` enum('artista','cliente') NOT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `foto_perfil_url` varchar(255) DEFAULT NULL,
+  `fecha_registro` datetime DEFAULT CURRENT_TIMESTAMP,
+  `estado` enum('activo','suspendido') DEFAULT 'activo',
+  PRIMARY KEY (`id_usuario`),
+  UNIQUE KEY `correo` (`correo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE IF NOT EXISTS `videos_proceso` (
+  `id_video` int NOT NULL AUTO_INCREMENT,
+  `id_artista` int NOT NULL,
+  `titulo` varchar(150) NOT NULL,
+  `descripcion` text,
+  `url_video` varchar(255) NOT NULL,
+  `fecha_publicacion` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_video`),
+  KEY `id_artista` (`id_artista`),
+  CONSTRAINT `videos_proceso_ibfk_1` FOREIGN KEY (`id_artista`) REFERENCES `artistas` (`id_artista`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
